@@ -1,0 +1,4 @@
+Mary had a little butterfly,
+with wings of splendid colors;
+every time Mary did her CISC 2000 homework,
+her butterfly handled the debugging.

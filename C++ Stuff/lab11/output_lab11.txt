@@ -1,0 +1,6 @@
+NYC Division -- Payroll Test:
+[444559999] Adam Driven     Total pay: $  3,440.00
+[555993322] Minnie Castile  Total pay: $  3,487.50
+[666111222] Brad Pittman    Total pay: $  4,279.50
+[555993322] Minnie Castile  Total pay: $  3,948.00
+[434558833] Estelle Parsnip Total pay: $  7,600.00
