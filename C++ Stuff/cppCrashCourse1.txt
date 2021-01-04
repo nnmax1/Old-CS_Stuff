@@ -1,0 +1,777 @@
+
+C++ Crash Course [Part 1 ]
+
+========================================================================
+Why C++?
+--It's a general purpose programming language.
+--It's a low latency programming language.
+--It's one of the fastest performing languages. 
+--Has powerful features such as templates and multithreading
+--Attractive skill to have when applying for jobs 
+  at finance companies (e.g. banks, hedge funds, etc)
+--Some Real World Uses of C++:
+  --Building GUIs (e.g Adobe Photoshop , Adobe Premier, etc)
+  --Operating System dev. 
+  --Web browser dev. (Node.js written mainly in C++)
+  --Robotics
+  --Quantitative Finance
+  --Game development
+  --And Many More...
+========================================================================
+Basic Data types:
+--bool: (true,false)
+--short: (16 bit integer)
+--int: (32 bit integer)
+--long: (64 bit integer)
+--char: ('A' - 'Z' plus special characters)
+--std::string (concactentation of chars. create an instance using string class in C++ STL. ) 
+--double (double precision number. 64 bit)
+--float (floating point number 32 bit)
+--unsigned [type]: (used to specify only positive numbers. e.g. unsigned int refers to only + integers)
+
+========================================================================
+Variables:
+
+--a way to store values of a predefined type
+--they are essentially an instance of a type 
+example) 
+int val;
+//val is an instance of an integer.
+//A value of type integer can be assigned to variable val.
+========================================================================
+Input/Output from the console and File I/O:
+
+--std::cout<<[argument];
+--std::cin>>[argument];
+--cout and cin are from the iostream class in the std library
+--std::ifstream //read from files
+--std::ofstream //write to files
+--ifstream and ostream are from the fstream class in the std library 
+
+
+//Example cout and cin
+int num;
+//print "Enter a number: " to the console
+cout<<"Enter a number: ";
+//read in a number from console and store it in variable num
+cin>>num;
+//print num to console
+cout<<num;
+
+//Example File I/O: 
+
+std::string filename = "myfile.txt";
+std::ifstream filereader;
+filereader.open(filename);
+std::ofstream filewriter;
+filewriter.open(filename) 
+if(filereader.fail()){std::cout<<"File failed to open";exit(1);}
+if(filewriter.fail()){std::cout<<"File failed to open";exit(1);}
+
+int num;
+//gets input from myfile.txt and stores it in variable num
+filereader>>num; 
+//write to myfile.txt whatever value is stored in variable num
+filewriter<<num; 
+
+filereader.close();
+filewriter.close();
+
+========================================================================
+Arithmetic Operators:
+
+- + [add] 
+- - [minus]
+- * [multiply]
+- / [division]
+- % [modulo or remainder]
+e.g)
+double num1= 19.2, num2 = 83.9, result=0;
+result = num1 /*[INSERT OPERATOR HERE]*/ num2;
+std::cout<<result<<"\n";
+========================================================================
+Increment(++) v.s Decrement (--)
+
+-- Why is C++ called "C++"? 
+    --It was named C++ because it introduced the ++ operator which its predecessor, 
+    the C Programming language, did not have. 
+--The increment (++) operator increases the value assigned to a variable by 1 
+--The decrement (--) operator decreases the value assigned to a variable by 1 
+
+--Postfix v.s prefix
+
+--[Prefix] If you put ++ or -- before the variable you want to increment/decrement, 
+the value in your variable will be incremented first, then checked.
+-- [Postfix] If you put ++ or -- after the variable you want to increment/decrement, 
+the value in your variable will be checked first, then incremented/decremented. 
+
+
+-Example
+
+int i=1;
+cout<<++i; //prints 2 b/c value of i is incremented, then value is checked. 
+int q=1;
+cout<<q--; //prints 1 b/c value of q is checked first, then decremented 
+cout<<q; //prints 0 b/c value of q was decremented in prev. statement
+========================================================================
+Relational Operators:
+- > 
+- <
+- >=
+- <=
+- == 
+- !=
+
+= v.s == : 
+-- '=' is the assignment operator 
+-- '==' checks for equality.
+========================================================================
+Logical Operators:
+- && (and)
+- || (or)
+
+========================================================================
+Control Flow:
+
+--If, else if, else
+--allows us to control what happens to our code 
+--allows us to create conditions for which our code is executed
+
+Example.)
+int height = 52;
+bool canRideRollerCoaster ;
+bool mustRideWithAdult;
+if(height> 48) {
+    canRideRollerCoaster =true;
+    mustRideWithAdult = false;
+}
+else if(height <48 && height > 40) {
+    mustRideWithAdult = true;
+    canRideRollerCoaster =true;
+}
+else {
+    mustRideWithAdult = false;
+    canRideRollerCoaster = false;
+}
+========================================================================
+Ternary Operator:
+
+[condition] ? [if_true] : [if_false]
+
+========================================================================
+For Loops
+//version 1:
+for(/*initialize the iterator*/;/*some condition*/;/*increment/decrement the iterator*/)
+{
+    //some code...
+} 
+//version 2:
+for(/*element*/ : /*in some array or std::vector*/ ) 
+{
+    //some code...
+}
+========================================================================
+While and do-while Loops
+
+while(/*some condition*/){
+
+    //some code...
+
+    //do something to break the condition
+}
+
+do {
+    //some code...
+    //do something to break the condition
+}while(/*some condition*/);
+
+--In a while loop, the condition is checked before going into the loop. In a do-while, 
+we enter the loop first, then check the condition 
+========================================================================
+Nested Loops
+
+--You can have multiple loops inside of loops.
+--This will have a significant impact on the time complexity of your code.
+
+[type of loop](/*condition*/){
+    [type of loop](/*condition*/){
+        //some code...
+    }
+}
+========================================================================
+Enums: 
+--Some variables only need to store a small set of named values.
+--An enumeration type (enum) declares a name for a new type and possible values for that type.
+--allows the programmer to represent a combination of choices.
+
+enum TrafficLight 
+{
+    Red, 
+    Green, 
+    Yellow
+}
+
+enum Courses
+{
+    English, 
+    LinearAlgebra, 
+    ComputerScience101, 
+    Philosophy  
+}
+========================================================================
+Continue Statement
+--A continue statement in a loop causes an immediate jump to the loop condition check. 
+    --A continue statement can sometimes improve the readability of a loop.
+example)
+for(int i=0;i<100;i++) {
+    if(/*some condition*/){
+        //some code...
+        continue;
+    }
+    if(/*another condition*/) {
+        //some code..
+    }
+}   
+========================================================================
+Break Statement
+--A break statement in a loop causes an immediate exit of the loop. 
+    --A break statement can sometimes yield a loop that is easier to understand.
+
+example)
+for(int i=0;i<100;i++) {
+    if(/*some condition*/){
+        //some code...
+        break;
+    }
+    if(/*another condition*/) {
+        //some code..
+        break;
+    }
+}   
+========================================================================
+Switch statement:
+-Allows a variable to be tested for equality against a list of values. 
+
+Example 1.)
+int num =2;
+switch(num)
+{
+    case 1:
+    //some code..
+    break;
+    case 2:
+    //some code...
+    break;
+    default:
+    //some code..
+    break;
+}
+
+Example 2.) 
+char userAnswer='C';
+bool correct;
+switch(userAnswer)
+{
+    case 'A':
+    correct=false;
+    break;
+    case 'B':
+    correct=true;
+    break;
+    case 'C':
+    correct=false;
+    break;
+    case 'D':
+    correct=false;
+    break;
+    default:
+    correct=false; 
+    break;
+}
+========================================================================
+Functions
+
+--Model 
+
+[Return type] [function name] ([parameter(s)])
+{
+    //code...
+
+    return; 
+}
+
+examples.) 
+void shout(string message) {
+    std::cout<<message<<"\n";
+    return;
+}
+shout("hello");//output: hello
+double sum(double n1, double n2)
+{
+    return n1+n2;
+}
+std::cout<<sum(8.9, 1.1);//output: 10
+========================================================================
+Overloading Functions:
+--You can have multiple functions w/ the same name, however, they must have different parameters
+--NOTE: This is not yet related to polymorphism.
+example)
+double sum(double n1)
+{
+   return n1 + 10;
+}
+double sum(double n1, double n2)
+{
+    return n1 + n2;
+}
+========================================================================
+Reference Operator (&):
+
+-- '&' is the reference operator
+--Once a reference is initialized with a variable, 
+  either the variable name or the reference name may be used to refer to the variable.
+
+========================================================================
+Call by reference vs value:
+
+int num = 5;
+
+void callByValue(int val)
+{
+    val = 2;
+}
+
+void callByReference(int &val)
+{
+    val = 2;
+}
+
+========================================================================
+Arrays 
+
+--An array is a data structure that allows a programmer to store data in a linear fashion
+--Elements in an array are accessed by their index
+--the size of the array must be predefined
+
+example)
+
+int myArr[28]= {0};
+
+string myNames[3] = {"john doe", "jane doe", "jim doe"};
+
+double temperatures[4] = {81.3, 73.93, 83.33, 82.72};
+
+//iterating thru Arrays 
+for(std::string name : myNames)
+{
+    std::cout<<name<<"\n";
+}
+for(double temp : temperatures)
+{
+    std::cout<<temp<<"\n";
+}
+========================================================================
+2D Arrays:
+
+--An array with two dimensions with 1 dimension representing the number of rows and 
+  the other the number of columns.
+  --You can also think of the dimensions as height and width. 
+--For example, if you're making a tic tac toe game you could represent your board
+  as a 2D array.
+--2D arrays can also be used to represent matrices.
+
+//Code to initialize a 3 x 3 matrix w/ all zeroes
+int matrix[3][3];
+for(int row = 0; row < 3; row++ ){
+    for(int col = 0; col <3; col++) {
+        matrix[row][col] = 0;
+    }
+}
+//create an identity matrix
+matrix[0][0]=1;
+matrix[1][1]=1;
+matrix[2][2]=1;
+//The matrix would look like this: 
+       1 0 0
+       0 1 0
+       0 0 1
+//instead of
+========================================================================
+Pointers
+
+--pointers allow us to access the memory address of a Variables
+--use * (dereference operator) to access value the pointer variable is referencing
+--use & (reference operator) to access memory address of pointer variable
+
+example) 
+int num =3;
+int *ptr1 = &num; //creater a pointer that points to and int var called num
+std::cout<<ptr1<<"\n";// memory address
+std::cout<<*ptr1<<"\n"; // 3
+std::cout<<&ptr1<<"\n"; // memory address
+
+========================================================================
+Dynamic Arrays:
+
+--we can declare an array where the size of the array is determined at runtime
+--Since we use the "new" operator to create a dynamic array, we must also call
+ "delete" on the dynamic array to deallocate the array from memory;
+
+example)
+int numStudents; //size of the array
+
+std::cout<<"Enter the number of students in the class: ";
+std::cin >> numStudents;
+
+//create a dynamic array of student names w/ the size being the num of students in the
+// class
+int * studentNames = new string[numStudents];
+
+//do something w/ the array...
+
+
+delete [] studentNames;//deallocate the memory from freestore
+========================================================================
+C-strings 
+
+--Cstrings are an array of characters (char) that behave like strings
+--we need to add the header <cstring> to use Cstrings
+
+example)
+#include <cstring>
+int main() {
+char name[50] = "nnmax1";
+char *name2 = "nnmax2";
+std::cout<<name<<"\n"; //prints nnmax1 to the console
+std::cout<<name2<<"\n";//prints nnmax2 to console
+}
+========================================================================
+Stringstreams (std::istringstream): 
+
+--A std::istringstream associates a string object with a 
+ stream allowing the programmer to read from the string as if it were a stream (like std::cin).
+--Stringstreams are best used in Loops
+--include the sstream header to use std::istringstream
+
+example)
+//function that counts the number of words in a string
+int wordCounter(string str) 
+{ 
+    //break up the string into words using string stream 
+    std::istringstream s(str); 
+    std::string word; 
+  
+    int count = 0; 
+    while (s >> word) 
+    {
+        count++; 
+    }
+    return count; 
+} 
+========================================================================
+Vectors (std::vector)
+
+--Similar to an array, a std::vector is a data structure that allows a programmer to store data in a linear fashion.
+--Unlike arrays, you don't need to predefine the size of a vector before using it. You only need to specify the type.
+--Vector useful member functions
+   --push_back(/*item*/) => inserts an item into the vector
+   --size() => returns the size of the vector
+   --begin() => returns the vector's beginning iterator
+   --end() => returns the vector's end iterator 
+   --pop_back() => remove an item 
+   --empty() => check if vector is empty
+   --clear() => clear content
+   --swap() => swap content 
+   --insert() => insert an element 
+   --assign() => assign vector content (or use overloaded assignment operator)
+--Also, if you use the header <algorithm> in your c++ program, you can 
+  access the function std::sort which you can use to sort a vector. 
+
+example)
+#include <vector>
+#include <algorithm>//access std::sort
+int main() {
+    std::vector<int> myIntVector;
+    myIntVector.push_back(48);
+    myIntVector.push_back(23);
+    myIntVector.push_back(12);
+    myIntVector.push_back(85);  
+    //std::sort takes in 2 vector iterators
+    std::sort(myIntVector.begin(), myIntVector.end()); //sort L -> G
+    myIntVector.pop_back();//delete last element in the vector
+}
+========================================================================
+2D std::vector
+
+--Just like how you can make n-dimensional arrays, you can make n-dimensional std::vector 
+objects
+example)
+std::vector<std::vector<int>>identityMatrix = { {1, 0, 0 }, {0, 1, 0}, {0, 0, 1}};
+//print elements in identityMatrix
+for(int row : identityMatrix) {
+    std::cout<<row[0]<<" "<<row[1]<<" "<<row[2]<<"\n";
+}
+//output would look like this:
+1 0 0
+0 1 0
+0 0 1
+========================================================================
+Encapsulation: 
+--Refers to the access level of items in a class
+--In C++, access level specifiers are protected, public, and private.
+--Gives programmers the ability to seperate the implementation from the interface 
+  when writing classes.
+--C++ access levels: public, private, and protected.
+  --public: accessible to class members and members outside of class
+  --private: accessible to class members only
+  --protected: accessible to members in the class that defines them and in classes that 
+    inherit from that class.--Inheritance is an extremely useful principle of OOP 
+    b/c it allows for code reusablity.
+========================================================================
+Structs:
+
+--Allow programmers to create their own custom data types
+--Allows us to have a collection of variables of mixed data types together into 
+  a single structure.
+--Everything in a struct is public by default
+--You can have constructors in a struct.
+example)
+
+struct Person {
+    double height,weight;
+    int age;
+    string name;
+}
+//using the Person struct
+Person myPerson; //myPerson is an instance of Person or a variable of type Person
+myPerson.height = 74;
+myPerson.age = 38;
+myPerson.name = "John Doe";
+========================================================================
+Classes:
+
+--Classes are an extension of Structs
+--Within a class there is a constructor (or multiple constuctors), member functions, 
+  and member variables
+--Access level: everything in a class is private by default
+--Constructors are often used to initialize class member variables
+--A class may have a destructor if it is necessary to deallocate any dynamic variables 
+
+Example) 
+
+class Person {
+    public: //accessible 
+    Person(string n, int a, double h, double w) {
+        name = n;
+        age = a;
+        height = h;
+        weight = w;
+    }
+    //get attributes of the person
+    string get_name() {return name;}
+    double getHeight() {return height;}
+    double getWeight() {return weight;}
+    int get_age() {return age;}
+    void showBMI() {std::cout<<calcBMI();}
+    virtual bool isOverweight(){return false;}
+
+    private: //inaccessible
+    //member vars
+    std::string name;
+    int age;
+    double height,weight;
+    //member function
+    double calcBMI() {return height/weight;}
+}
+
+//using the Person class
+int main() {
+    Person myPerson("John Doe", 37, 73.3, 182.3);
+    std::cout<<myPerson.get_name()<<"\n";
+    std::cout<<myPerson.get_age()<<"\n";
+    std::cout<<myPerson.getHeight()<<"\n";
+    std::cout<<myPerson.getWeight()<<"\n";
+
+}
+========================================================================
+Abstraction 
+--Using abstract class/Interface we express the intent of the class rather than the actual implementation.
+ In a way, one class should not know the inner details of another in order to use it, just knowing 
+ the interfaces should be good enough.
+--The way we use abstraction is by writing our classes in a header files (.h or .hpp files) and the definitions
+  of our class members in source files (.cpp , .cu, .cxx, or etc. files).
+========================================================================
+Inheritance and Polymorphism:
+
+--Inheritance allows us to derive new classes out of pre-existing classes and allows for code reusability.
+--All constructors, destructors, and public member functions are accessible to derived classes.
+--Polymorphism has two type: static and dynamic
+  --Static polymorphism is achieved using method overloading (methods have same name, diff. params)
+  --Dynamic polymorphism using method overriding
+--The example below is a demo of dynamic polymorphism because the virtual function bool isOverweight() in the 
+   Person class above is being overriden.
+--Allows programmers to create A.D.Ts (Abstract Data Types) such as Stacks, Queues, Linked lists, and etc.
+--Note how the function isOverWeight() is being overidden from the base class Person to the  
+   derived classes Male and Female.
+
+example) 
+class Male : Person {
+    public:
+    //empty default constructor
+    Male() {    } 
+    bool isOverweight() {
+        bmi = getHeight()/getWeight();
+        if(bmi>25 && bmi < 30){return true}
+        return false;
+    }
+    private: 
+    double bmi;
+}
+class Female : Person {
+    public: 
+    //empty default constructor
+    Female() {}
+    bool isOverweight() {
+        bmi = getHeight()/getWeight();
+        if(bmi>24 && bmi < 29) {
+            return true;
+        }
+        return false;
+    }
+}
+int main() {
+    Male johnDoe("John Doe", 43, 83, 182.3);
+    johnDoe.isOverweight();
+    Female janeDoe("Jane Doe", 38, 72, 122);
+}
+========================================================================
+Friend Functions 
+
+--A friend can be a function, function template, or member function, or a class or class template, 
+  in which case the entire class and all of its members are friends.
+--Useful for overloading operators in classes.
+
+Example) 
+//say I wanted to overloaded the ostream operator so that it can take an Person object as a parameter
+//and display the the Person object's name
+
+//you would include this friend function in the Person class above
+friend ostream& operator<<(ostream& os, const Person person) 
+{
+    std::cout<<person.get_name(); 
+}
+
+int main() {
+    Person myPerson("John", 83, 67.9, 184.89);
+    std::cout<<myPerson<<"\n"; //would output the name of my person (John)
+}
+========================================================================
+Namespaces
+
+--They provide a method for preventing name conflicts in large projects.
+--In a namespace you can have a collection of classes, functions, and variables
+--The namespace that I have been referencing thus far is the standard namespace.
+--Use the namespace name, then the scope resolution operator to access an item in a namespace
+--e.g) std::cout [we are accessing the function cout from the standard namespace]
+
+Example)
+namespace NicksNamespace {
+    //classes 
+    class Class1{
+        public:
+        //constructor
+        Class1() {}
+        void function1() {return;}
+        void function2() {return;}
+        private:
+        void function3() {return;}
+        int num;
+        double num2;
+    };
+    class Class2{
+        public:
+        //constructor
+        Class2() {}
+        void function1() {return;}
+        void function2() {return;}
+        private:
+        void function3() {return;}
+        int num;
+        double num2;
+    };
+    class Class3{
+        public:
+        //constructor
+        Class4() {}
+        void function1() {return;}
+        void function2() {return;}
+        private:
+        void function3() {return;}
+        int num;
+        double num2;
+    };
+}
+========================================================================
+Exception Handling
+
+--There are 2 types of errors that could happen in your code: runtime and compile time.
+  --Compile Time: errors include library reference, syntax error or incorrect class import.
+  --Runtime: - They are also known as exceptions. An exception caught during run time creates serious problems.
+--To handle for runtime errors, we must use these three operators: try, catch, and throw.
+--we execute the code in the try block and an exception is thrown, 
+--we use catch to catch the exception from there we write some code to handle the exception.
+----------------------------------------------------
+try {
+    //some code...
+    throw parameter;
+}
+catch(exceptionname ex) {
+    //some code to handle exception
+}
+----------------------------------------------------
+Example.) 
+
+double division(double n1, double n2){
+    if(n2==0){throw "Can't divide by 0\n";}
+    return n1/n2;
+}
+
+int main( ){
+    try {
+        division(5,0);
+    } catch (char * exception) {
+        std::cout<<exception;
+        //exit program w/ code 1
+        exit(1);
+    }
+}
+========================================================================
+Generic Programming and templates
+
+--Allows us to write algorithms that can apply for any generic type. 
+--the "template<typename T>" prefix tells the compiler that the definition/declaration 
+of the function or class that follows is a template and that T is a type parameter. 
+    --The type parameter is interchangable with any type and can be used just like any type
+
+Generic Swap Function:
+
+template<typename T>
+swap(T &val1, T& val2) {
+    T temp = val2;
+    val2 = val1;
+    val1 =temp;
+}
+
+--When the C++ compiler sees a call of this generic swap function, it notices
+  the types of the arguments and then uses the template to produce a function definition 
+  with the type parameter T replaced by the actual type of the arguments. 
+  --So, if the 2 parameters are char variables, the template would produce a function
+  definition with the type parameter as char. 
+
+--Example templates in the C++ STL: 
+    --std::cout and std::cin
+    --std::ifstream and std::ostream
+    --std::vector, std::array, std::list
+    --and many more...
+
+

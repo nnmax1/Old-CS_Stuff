@@ -1,0 +1,200 @@
+C++ Crash Course [Part 2 ]
+
+========================================================================
+STL Containers 
+
+Overview
+--Container classes of the STL are various data structure implementations such as
+stacks, queues, linked lists, , and binary search trees.
+--Each container has unique accessor and mutator functions. They also have different kinds of iterators </li>
+--This section will cover the main container classes in the STL. 
+
+========================================================================
+Sequential Containers:
+-Definition: sequential containers arrange data in a linear fashion so that there is a 1st, second, next element, and so on up to a last element. The sequential container
+ template classes are list, forward_list, queue, deque, stack, array, and vector.
+--std::foward_list and std::list are generic implementations of linked lists in STL. 
+--Two Kinds of linked lists: 
+    --Singly linked list (only 1 link from one item to another)
+        --++ defined, -- not defined 
+    --Doubly linked list (2 links from one item to another)
+        --++ and -- are defined
+========================================================================
+std::stack 
+--What is it?: A generic implementation of the stack (LIFO) data structure 
+--Insert and remove elements by calling push() and pop() methods. Use methods size() to get
+size and empty() to check emptiness. top() returns a mutable reference to the top element of the stack.
+--Overloaded == operators built in to the stack class to compare the size of 2 stack objects 
+========================================================================
+std::queue 
+--What is it?: A generic implementation of the queue (FIFO) data structure. 
+--front() and back() methods return mutable references to the front and back of the queue. 
+push() and pop() methods are used to add and remove elements to and from the queue. 
+--Overloaded == operator to compare queue objects </li>
+========================================================================
+Associative Containers 
+--Two types: std::set and std::map 
+--They store data like structs, not classes (like stack, queue, list, or vector). 
+--Each data in the container has an associated value called a key. 
+========================================================================
+std::set 
+--Stores data without repetition. First insertion, stores an element in the set. 
+--Additional insertions after the first insertion has no effect, so every element in the set is unique.</li>
+--Each element has its own key, so you just add or remove elements and check whether the element exists in the set</li>
+  insert(e), find(e), and erase(e) to insert, find, and remove e in the set object where e is some element in the set.</li>
+--In set, erase() is overloaded to take an iterator as a paramenter. If you use erase() w/ an iterator, it
+will erase the element at the location of the iterator. </li>
+--Overloaded == operator to compare if the elements and the size of 2 set objects </li>
+========================================================================
+std::map 
+--Implementation of red black tree (self balancing binary search) data structure
+Is a function given as a set of ordered pairs. 
+--For each value there is in the pair, there is at most 1 value to complete the pair 
+--In a map object, we use string values to represent keys so that the map can associate unique/distinct 
+values.
+--Each value in the map has their own key. Hence, maps are essentially a set key-value pairs 
+--maps are often used to parse JSON data b/c of JSON's key-value syntax 
+--insert(e) insert e into the map object where e is some element 
+--erase(desiredKey), find(desiredKey), insert(desiredKey) to remove, insert, and find elements based on their assigned key in the map 
+--m[desiredKey] to access an element by their corresponding key 
+--Overloaded == operator to compare the number of pairs of 2 map objects 
+========================================================================
+Iterators: 
+--Iterators are generalizations of pointers</li>
+--They're typically implemented w/ pointers. However, they're not pointers
+--They are used in a variety of STL template data structure implementations (e.g. std::vector and std::stack)</li>
+--The semantics, naming, and syntax of iterators are the same across different container types. However, each container class has its own iterator types.</li>
+--You may manipulate iterators using the following overloaded operators </h2>
+   ++ (prefix or postfix)
+   --(prefix or postfix)
+   == and !=
+   *
+--The dereference operator gives the iterator access to the data located at the value it points to.
+========================================================================
+Types of iterators:
+--Forward: ++ works on the iterator
+--Bidirectional: ++ and -- works on the iterator
+--Random Access: ++,-- and random access all work on the iterator 
+
+--Constant Iterators (const_iterator): 
+    --You cant change the element at its location
+--Reverse Iterators (reverse_iterator): 
+    --Can be used to cycle thru all elements in a container
+    --This assumes that the container has bidirectional iterators 
+========================================================================
+Regular Expressions (std::regex)
+--They allow us to describe a language from the class of regular languanges (std::regex). 
+--For example: We could use a reg. expression to see if a string contains a date in MM-DD-YYYY 
+  format 
+--Note: some C++ compilers do not support regular expressions. If you using any C++ version > 11, 
+you should be fine
+--"regex" is the class in the STL that allows us to use regular expressions</li>
+========================================================================
+Types of Reg. Expressions </h2>
+
+--Letter and digits : the same digit(s) & letter(s)
+ (e.g the reg expression dog9 is the same as the text 'dog9'.
+-- . : matches any single character 
+-- | : union or logical 
+-- R? : the reg. expression R occurs 0 or 1 times
+-- R+ :  the reg. expression R repeats consecutively 1 or more times.
+-- R* : the reg. expression R repeats consecutively 0 or more times
+-- R{n} : the reg. expression repeats consecutively n times 
+-- R{n, m} : the reg. expression repeats consecutively in some range n to m
+-- ^ : indicates the beginning of text 
+-- $ : indicates end of text
+-- [listOfElements] : Match any of the elements (e.g. [abcd] would match to a, b, c, d) 
+-- [e1 to e2] :  match any elements in the range e1 to e2 (e.g [a-zA-Z] would match any uppercase or lowercase letter) 
+-- () : precendece and expression grouping 
+-- \d : A single digit 
+-- \D : A nondigit 
+-- \s : A whitespace character (e.g new line, tab, or space(s))
+-- \w : A word character
+========================================================================
+Examples of some Reg. Expressions 
+aaabbb is the same as a{3}b{3}
+a* //any sequence of  >= 0 a's
+a+b* // >= 1 a's followed by a sequence of b's
+[a-zA-Z_]+[a-zA-Z0-9] //a letter or underscore follows any sequence of letters, digits, or underscores. 
+========================================================================
+A C++ Program with Reg. Expressions 
+
+//program to check if user entered date in valid format using regex
+int main() {
+    std::string date;
+    //month is represented by a either 1 or 2 digits (1=January, 11=November)
+    //day is represented by either 1 or 2 digits (1-30 or 1-31)
+    //year is represented by 4 digits (e.g 1999) 
+    // | is the logical operator for "or"
+    std::string validDate = R("{(\d{1}|\d{2})/(\d{1}|\d{2})/(d{4})"});
+    
+    //create reg. expression object with validDate
+    std::regex regDate(validDate);
+    
+    std::cout<<"Enter a date (MM/DD/YYYY)
+
+    //compare string date to reg. expr. if matches, date is in correct format
+    if(regex_match(date, validDate) {
+        std::cout<<"Date is in correct format\n";
+    }else {
+        std::cout<<"Date is not in the correct format\n";
+    }
+}
+
+========================================================================
+Threads 
+--They allows us to seperate where our code is executed.</li>
+--You can use threads to run your code asynchronously
+--C++ allows us to run our code on multiple threads. This is a very powerful feature of C++.</li>
+--In an ideal environment, threads will typically execute in parallel to each other. However, this does not always happen
+b/c the computer often switches resources between threads in order to offload compute to other threads. </li>
+--Also, if you're interested in working in quantitative finance, being able to utilize multiple threads is a attractive skill to have on your resume. </li>
+========================================================================
+Why are threads useful? 
+--If you need extra speed in your application. 
+--When you want some processing to continue when in other part is stopped (in parallel) 
+--On your GPU, you have access to hundreds of thousands of threads. 
+--NVIDIA's CUDA platform is great for building multithreaded applications
+========================================================================
+How Mulithreading Affects You
+
+Your phone/computer's OS (windows, mac, iOS, android, or linux) allows you to run multiple 
+programs at the same time. For instance, say you're streaming music while you're checking your
+emails. While your doing that, your computer's OS is using threads to share computing resources 
+between your music streaming program and your web browser. There also might even be other tasks 
+that are running that you're not aware of. For example, many anti-malware softwares run asynchronously.
+
+If you use Windows, you can run Task Manager which shows all the processes that are
+currently running as well as those that are running asynchronously. 
+========================================================================
+std::thread 
+--get_id() : each thread is given a unique id. get_id() returns the thread id 
+--join() : makes the main() function wait for each thread to wait for each thread to finish before continuing. Programmers use join() to synchronize threads
+std::mutex : mutual exclusion. Allows programmers to prevent threads from being overwritting each other. Mutex locks a thread so only that one thread can enter a region of code at a time 
+    --This is important to prevent deadlock errors. A common error in operating system development.
+========================================================================
+Compiling C++ Programs w/ Multiple threads using clang or gcc
+--When working with STL thread class you need to add the command line arg "pthread"
+--Compile Statement: 
+    [Compiler] [Check Flags] -std=c++17 yourProgram.cpp -pthread
+========================================================================
+Smart Pointers (std::shared_ptr, std::unique_ptr, and std::weak_ptr)
+--Pointers are great, however, if not deallocated correctly, memory leaks can 
+happen and your program can crash. Smart pointers simplify memory management and
+the sharing of objects in memory.
+--shared_ptr is a template class that is a wrapper of an object allocted from the dynamically allocated objects. 
+    --The wrapper uses reference counting to track how many other pointers reference the smart pointer object 
+    --A counter is incremented every time a new variable references the object. Its decremented each time
+    a variable no longer references the object (when variable is deallocated).
+--All of these memory management processes are performed automatically. This means that the
+  programmer does not have to worry about deallocating smart pointer variables using destructors. 
+--Thus, smart pointers make it more efficient for programmers to allocate dynamic variables 
+========================================================================
+unique_ptr, shared_ptr, weak_ptr
+
+--unique_ptr, there can only be at most one unique_ptr pointing at a value (hense, distictness/uniqueness). When a unique_ptr object is deallocated, the data is automatically reclaimed.</li>
+--Contrary to unique_ptr, shared_ptr allows for multiple pointers to point at a given resource.
+--weak_ptr: t pointer that holds a non-owning ("weak") reference to an object that is managed by std::shared_ptr
+
+--Honestly, I do not really use weak_ptr. If I am going to utilize smart pointers I will mostly go 
+with unique_ptr or shared_ptr. 
