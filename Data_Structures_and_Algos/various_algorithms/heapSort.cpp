@@ -1,17 +1,20 @@
 #include <iostream>
 #include "../data_structures/priorityQueue.hpp"
-using namespace std;
+// #include <queue> 
+// you can alternatively used std::priority_queue
+
 
 //Generic Heap sort implementation to sort an array 
 
 //Time complexity: 0(nlogn)
 
 
+//Generic Heap Sort methods
 
-//Generic Heap Sort method
+
+// uses the PriorityQueue class defined in data_structures folder
 template<typename T>
-void HeapSort(T A[], int n)
-{
+void HeapSort(T A[], int n) {
 	//build heap using PriorityQueue class
 	PriorityQueue<T> pq(A, n);
 
@@ -21,6 +24,7 @@ void HeapSort(T A[], int n)
 		n--;
 	}
 }
+
 
 //test heapSort: 
 int main()
